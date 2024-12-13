@@ -1,29 +1,31 @@
-import { useState } from "react"
-import padsData from "./pads"
+import { useState } from "react";
+import padsData from "./pads";
 
-export default function App() {
+export default function App({ darkMode }) {
+    const [pads, setPads] = useState(padsData);
+
     /**
-     * Challenge part 1:
-     * 1. Initialize state with the default value of the
-     *    array pulled in from pads.js
-     * 2. Map over that state array and display each one
-     *    as a <button> (CSS is already written for you)
-     *    (Don't worry about using the "on" or "color" 
-     *    properties yet)
+     * Challenge: use a ternary to determine the backgroundColor
+     * of the buttons
+     * If darkMode is true, set them to "#222222"
+     * If darkMode is false, set them to "#cccccc"
      */
-
-    const [pads, setPads] = useState(padsData)
 
     const buttonElements = pads.map((pad) => {
         return (
-            <button key={pad.id}></button>
-        )
-    })
+            <button
+                style={
+                    darkMode === true
+                        ? { backgroundColor: "#222222" }
+                        : { backgroundColor: "#cccccc" }
+                }
+                key={pad.id}
+            ></button>
+        );
+    });
     return (
         <main>
-            <div className="pad-container">
-                {buttonElements}
-            </div>
+            <div className="pad-container">{buttonElements}</div>
         </main>
-    )
+    );
 }
